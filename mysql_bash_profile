@@ -1,0 +1,19 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
+export PATH
+
+set -o vi
+
+alias myPROD='mysql -h ftb-prod-migrated-cluster.cluster-cqkohrqdgzuh.us-west-2.rds.amazonaws.com -u d3mysql  -pKL77uH2VHPAVy6erek0s d3app'
+alias myINT='mysql -h ftb-int-4.cqkohrqdgzuh.us-west-2.rds.amazonaws.com -u d3mysql -pbhifTtNaD8fQzhT2 ftbint'
+alias myINT2='mysql -h ftb-suntrust-cluster.cluster-cqkohrqdgzuh.us-west-2.rds.amazonaws.com -u d3mysql -pbhifTtNaD8fQzhT2 ftbint3'
+alias mySTAGE='mysql -h ftb-stage-aurora-cluster.cluster-cqkohrqdgzuh.us-west-2.rds.amazonaws.com -u d3mysql -pbhifTtNaD8fQzhT2 ftbstage'
