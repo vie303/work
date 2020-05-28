@@ -1,0 +1,8 @@
+mysql_config_editor set --login-path=ftbprod --host=ftb-prod-migrated-cluster.cluster-cqkohrqdgzuh.us-west-2.rds.amazonaws.com --port=3306 --user=d3mysql --password
+
+mysql_config_editor set --login-path=ftbstage --host=ftb-stage-aurora-cluster.cluster-cqkohrqdgzuh.us-west-2.rds.amazonaws.com --port=3306 --user=d3mysql --password
+
+mysql_config_editor set --login-path=ftbint2 --host=ftb-suntrust-cluster.cluster-cqkohrqdgzuh.us-west-2.rds.amazonaws.com --port=3306 --user=d3mysql --password
+
+mysql_config_editor set --login-path=ftbint --host=ftb-int-4.cqkohrqdgzuh.us-west-2.rds.amazonaws.com --port=3306 --user=d3mysql --password
+

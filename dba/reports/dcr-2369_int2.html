@@ -1,0 +1,60 @@
+--------------
+select count(*)
+from m2_transfer_recurring
+where provider_name = 'D3ACH'
+  and created_ts > '2020-03-01'
+  and id not in (select recurring_id from m2_transfer_recurring_attr where attr_name = 'achType')
+--------------
+
+count(*)
+0
+--------------
+select count(*)
+from m2_transfer
+where provider_name = 'D3ACH'
+  and created_ts > '2020-03-01'
+  and id not in (select transfer_id from m2_transfer_attr where attr_name = 'achType')
+--------------
+
+count(*)
+0
+--------------
+INSERT INTO m2_transfer_recurring_attr (attr_name, recurring_id, created_ts, deleted, deleted_ts, modified_by, modified_by_type, updated_ts, version, attr_value)
+SELECT 'achType', r.id,  CURRENT_TIMESTAMP, false, null, 'DPS-2316', 'D3SCRIPT', CURRENT_TIMESTAMP, 0, a.attr_value
+FROM m2_transfer_recurring r INNER JOIN m2_transfer t ON t.recurring_id = r.id INNER JOIN m2_transfer_attr a ON t.id = a.transfer_id
+WHERE r.created_ts > '2020-03-01'
+  AND r.id not in (select recurring_id from m2_transfer_recurring_attr where attr_name = 'achType' and created_ts > '2020-03-01')
+  AND r.provider_name = 'D3ACH'
+  AND a.attr_name = 'achType' GROUP BY r.id
+--------------
+
+--------------
+INSERT INTO m2_transfer_attr (attr_name, transfer_id, created_ts, deleted, deleted_ts, modified_by, modified_by_type, updated_ts, version, attr_value)
+SELECT 'achType', t.id, CURRENT_TIMESTAMP, false, null, 'DPS-2316', 'D3SCRIPT', CURRENT_TIMESTAMP, 0, ra.attr_value
+FROM m2_transfer t INNER JOIN m2_transfer_recurring_attr ra ON t.recurring_id = ra.recurring_id
+WHERE t.provider_name = 'D3ACH'
+  AND t.id NOT IN (SELECT transfer_id FROM m2_transfer_attr WHERE created_ts > '2020-03-01' AND attr_name = 'achType')
+  AND t.created_ts > '2020-03-01'
+  AND ra.attr_name = 'achType'
+--------------
+
+--------------
+select count(*)
+from m2_transfer_recurring
+where provider_name = 'D3ACH'
+  and created_ts > '2020-03-01'
+  and id not in (select recurring_id from m2_transfer_recurring_attr where attr_name = 'achType')
+--------------
+
+count(*)
+0
+--------------
+select count(*)
+from m2_transfer
+where provider_name = 'D3ACH'
+  and created_ts > '2020-03-01'
+  and id not in (select transfer_id from m2_transfer_attr where attr_name = 'achType')
+--------------
+
+count(*)
+0

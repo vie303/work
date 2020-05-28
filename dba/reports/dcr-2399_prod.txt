@@ -1,0 +1,7 @@
+--------------
+call dcr_2393
+--------------
+
+Query OK, 0 rows affected
+
+Bye
